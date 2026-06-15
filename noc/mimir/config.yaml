@@ -1,0 +1,40 @@
+target: filesystem
+
+common:
+  storage:
+    backend: s3
+    s3:
+      endpoint: minio:9000
+      access_key_id: ${MINIO_ROOT_USER}
+      secret_access_key: ${MINIO_ROOT_PASSWORD}
+      insecure: true
+      bucket_name: mimir
+
+blocks_storage:
+  storage:
+    backend: s3
+    s3:
+      endpoint: minio:9000
+      access_key_id: ${MINIO_ROOT_USER}
+      secret_access_key: ${MINIO_ROOT_PASSWORD}
+      insecure: true
+      bucket_name: mimir-blocks
+
+compactor:
+  store: s3
+
+querier:
+  max_concurrent: 20
+
+query_frontend:
+  max_outstanding_queries: 10
+
+ruler:
+  storage:
+    backend: s3
+    s3:
+      endpoint: minio:9000
+      access_key_id: ${MINIO_ROOT_USER}
+      secret_access_key: ${MINIO_ROOT_PASSWORD}
+      insecure: true
+      bucket_name: mimir-ruler
